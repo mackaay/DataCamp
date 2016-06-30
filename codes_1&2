@@ -176,3 +176,18 @@ ggplot(iris.wide, aes(x = Length, y = Width, col = Part)) +
   facet_grid(. ~ Species)
   
   
+# Load the tidyr package
+library(tidyr)
+
+# Add column with unique ids (don't need to change)
+iris$Flower <- 1:nrow(iris)
+
+# Fill in the ___ to produce to the correct iris.wide dataset
+iris.wide <- iris %>%
+  gather(key, value, -Species, -Flower) %>%
+  separate(key, c("Part", "Measure"), "\\.") %>%
+  spread(Measure, value)
+#gather rearranges the data frame by specifying the columns that are categorical variables with a - notation. In this case, Species and Flower are categorical. 
+#separate splits up the new key column, which contains the former headers, according to .. The new column names "Part" and "Measure" are given in a character vector.
+#The last step is to use spread() to distribute the new Measure column and associated value column onto two columns.
+
