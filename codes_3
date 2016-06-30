@@ -1,15 +1,87 @@
 # Map cyl to y
-ggplot(mtcars, aes(x = mpg, y= cyl)+
+ggplot(mtcars, aes(x = mpg, y= cyl))+
 geom_point()
   
 # Map cyl to x
-ggplot(mtcars, aes(x = cyl, y = mpg)+
+ggplot(mtcars, aes(x = cyl, y = mpg))+
 geom_point()
 
 # Map cyl to col
-ggplot(mtcars, aes(x = wt, y = mpg)+
+ggplot(mtcars, aes(x = wt, y = mpg, col =cyl))+
 geom_point()
 
 # Change shape and size of the points in the above plot
-ggplot(mtcars, aes(x = wt, y = mpg, shape= 1, size= 4)+
+ggplot(mtcars, aes(x = wt, y = mpg, col =cyl))+
+geom_point(shape= 1, size= 4)
+
+# Given from the previous exercise
+ggplot(mtcars, aes(x = wt, y = mpg, col = cyl)) +
+  geom_point(shape = 1, size = 4)
+
+# Map cyl to fill
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) +
+  geom_point(shape = 1, size = 4)
+
+# Change shape, size and alpha of the points in the above plot
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) +
+  geom_point(shape = 16, size = 6, alpha = 0.6)
+  
+# Map cyl to size
+ggplot(mtcars, aes(x = wt, y = mpg, size = cyl))+
 geom_point()
+
+# Map cyl to alpha
+ggplot(mtcars, aes(x = wt, y = mpg, alpha = cyl))+
+geom_point()
+
+# Map cyl to shape 
+ggplot(mtcars, aes(x = wt, y = mpg, shape = cyl))+
+geom_point()
+
+# Map cyl to labels
+ggplot(mtcars, aes(x = wt, y = mpg, label = cyl))+
+geom_text()
+
+# Define a hexadecimal color
+my_color <- "#123456"
+
+# Set the color aesthetic 
+ggplot(mtcars, aes(x = wt, y = mpg, col =cyl))+
+geom_point()
+
+# Set the color aesthetic and attribute 
+ggplot(mtcars, aes(x = wt, y = mpg, col =cyl))+
+geom_point(col= my_color)
+#Overwrite the color of the points within geom_point() to my_color. Notice how this cancels out the colors given to the points by the amount of cylinders!
+
+# Set the fill aesthetic and color, size and shape attributes
+ggplot(mtcars, aes(x = wt, y = mpg, fill =cyl ))+
+geom_point(size= 10, shape= 23, col=my_color)
+
+# Expand to draw points with alpha 0.5
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) +
+geom_point(alpha=0.5)
+  
+# Expand to draw points with shape 24 and color yellow
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) +
+geom_point(shape=24, col="yellow")
+  
+# Expand to draw text with label x, color red and size 10
+ggplot(mtcars, aes(x = wt, y = mpg, fill = cyl)) +
+geom_text(label="x", col= "red", size= 10)
+
+# Map mpg onto x, qsec onto y and factor(cyl) onto col
+ggplot(mtcars, aes(x=mpg, y=qsec, col= factor(cyl)))+
+geom_point()
+
+# Add mapping: factor(am) onto shape
+ggplot(mtcars, aes(x=mpg, y=qsec, col= factor(cyl), shape= factor(am)))+
+geom_point()
+
+# Add mapping: (hp/wt) onto size
+ggplot(mtcars, aes(x=mpg, y=qsec, col= factor(cyl), shape= factor(am), size = (hp/wt)))+
+geom_point()
+#label and shape are only applicable to categorical data.
+
+
+
