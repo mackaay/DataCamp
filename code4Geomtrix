@@ -1,0 +1,4 @@
+iris.summary <- aggregate(iris[2:5], list(iris$Species), mean)
+names(iris.summary)[1] <- "Species"
+iris.summary
+
