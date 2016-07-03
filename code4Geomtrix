@@ -35,3 +35,152 @@ geom_jitter(alpha= 0.2)
 # Using the above plotting command, set the shape to 1
 ggplot(Vocab, aes(education, vocabulary))+
 geom_jitter(alpha= 0.2, shape=1)
+
+
+# Make a univariate histogram
+ggplot(mtcars, aes(mpg))+
+geom_histogram()
+
+# Change the bin width to 1
+ggplot(mtcars, aes(mpg))+
+geom_histogram(binwidth=1)
+
+# Change the y aesthetic to density
+ggplot(mtcars, aes(mpg))+
+geom_histogram(aes(y=..density..),binwidth=1)
+
+# Custom color code
+myBlue <- "#377EB8"
+
+# Change the fill color to myBlue
+ggplot(mtcars, aes(mpg))+
+geom_histogram(aes(y=..density..), fill=myBlue,binwidth=1)
+
+# Draw a bar plot of cyl, filled according to am
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar()
+
+# Change the position argument to stack
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar(position="stack")
+
+# Change the position argument to fill
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar(position="fill")
+
+# Change the position argument to dodge
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar(position="dodge")
+
+# Draw a bar plot of cyl, filled according to am
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar()
+
+# Change the position argument to "dodge"
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar(position = "dodge")
+
+# Define posn_d with position_dodge()
+posn_d <- position_dodge(width = 0.2)
+
+# Change the position argument to posn_d
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar(position = posn_d)
+
+# Use posn_d as position and adjust alpha to 0.6
+ggplot(mtcars, aes(cyl, fill = am))+
+geom_bar(position = posn_d, alpha = 0.6)
+
+# A basic histogram, add coloring defined by cyl 
+ggplot(mtcars, aes(mpg, fill=cyl)) +
+  geom_histogram(binwidth = 1, )
+
+# Change position to identity 
+ggplot(mtcars, aes(mpg, fill=cyl)) +
+  geom_histogram(binwidth = 1, position = "identity")
+
+# Change geom to freqpoly (position is identity by default) 
+ggplot(mtcars, aes(mpg, col = cyl)) +
+geom_freqpoly(binwidth=1)
+
+# Example of how to use a brewed color palette
+ggplot(mtcars, aes(x = cyl, fill = am)) +
+  geom_bar() +
+  scale_fill_brewer(palette = "Set1")
+
+# Use str() on Vocab to check out the structure
+str(Vocab)
+
+# Plot education on x and vocabulary on fill
+# Use the default brewed color palette
+ggplot(Vocab, aes(education, fill = vocabulary))+
+geom_bar(position = "fill")+
+scale_fill_brewer()
+
+# Final plot of last exercise
+ggplot(Vocab, aes(x = education, fill = vocabulary)) +
+  geom_bar(position = "fill") +
+  scale_fill_brewer()
+#The default color palette is "Blues". Since we have 11 categories but there are only 9 colors in this palette, our plot looked strange. 
+#To adjust the number of colors, we'll use a function, colorRampPalette(), to define a better color palette ramp. Use this function with blues, a set of blue colors which has been formed for you. Assign it to blue_range. 
+#colorRampPalette() generates a function, so when we call our object blue_range, we have to specify the number of colors we want from the range of values.  
+# Definition of a set of blue colors
+blues <- brewer.pal(9, "Blues")
+
+# Make a color range using colorRampPalette() and the set of blues
+blue_range <- colorRampPalette(blues)
+
+# Use blue_range to adjust the color of the bars, use scale_fill_manual()
+ggplot(Vocab, aes(x = education, fill = vocabulary)) +
+  geom_bar(position = "fill") +
+  scale_fill_manual(values=blue_range(11))
+  
+# Basic histogram plot command
+ggplot(mtcars, aes(mpg)) + 
+  geom_histogram(binwidth = 1)
+
+# Expand the histogram to fill using am
+ggplot(mtcars, aes(mpg, fill = am)) + 
+  geom_histogram(binwidth = 1)
+
+# Change the position argument to "dodge"
+ggplot(mtcars, aes(mpg, fill = am)) + 
+  geom_histogram(binwidth = 1, position= "dodge")
+
+# Change the position argument to "fill"
+ggplot(mtcars, aes(mpg, fill = am)) + 
+  geom_histogram(binwidth = 1, position= "fill")
+
+# Change the position argument to "identity" and set alpha to 0.4
+ggplot(mtcars, aes(mpg, fill = am)) + 
+  geom_histogram(binwidth = 1, position= "identity", alpha =0.4)
+
+# Change fill to cyl
+ggplot(mtcars, aes(mpg, fill = cyl)) + 
+  geom_histogram(binwidth = 1, position= "identity", alpha =0.4)
+  
+  
+# Print out head of economics
+head(economics)
+
+# Plot unemploy as a function of date using a line plot
+ggplot(economics, aes(x = date, y = unemploy)) +
+  geom_line()
+  
+# Adjust plot to represent the fraction of total population that is unemployed
+ggplot(economics, aes(x = date, y = unemploy/pop)) +
+  geom_line()
+  
+#Use head(recess) to print out the head of the recess dataset.
+# Expand the following command with geom_rect() to draw the recess periods
+ggplot(economics, aes(x = date, y = unemploy/pop)) +
+  geom_line()+
+  geom_rect(data=recess, inherit.aes = FALSE, aes(xmin = begin, xmax= end, ymin=-Inf, ymax = +Inf), fill = "red", 
+  alpha = 0.2)
+
+#gather() takes four arguments: the original data frame (fish.species), the name of the key column (Species), the name of the value column (Capture) and the name of the grouping variable, with a minus in front (-Year). They can all be specified as object names (i.e. no "").
+# Check the structure as a starting point
+str(fish.species)
+
+# Use gather to go from fish.species to fish.tidy
+fish.tidy <- gather(fish.species, Species, Capture, -Year)
