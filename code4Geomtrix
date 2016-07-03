@@ -184,3 +184,7 @@ str(fish.species)
 
 # Use gather to go from fish.species to fish.tidy
 fish.tidy <- gather(fish.species, Species, Capture, -Year)
+
+# Recreate the plot shown on the right
+ggplot(fish.tidy, aes(x = Year, y = Capture, col = Species)) + 
+  geom_line()
