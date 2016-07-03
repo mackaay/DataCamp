@@ -2,3 +2,36 @@ iris.summary <- aggregate(iris[2:5], list(iris$Species), mean)
 names(iris.summary)[1] <- "Species"
 iris.summary
 
+# Plot the cyl on the x-axis and wt on the y-axis
+ggplot(mtcars, aes(x = cyl, y = wt)) +
+  geom_point()
+
+# Try using geom_jitter instead of geom_point:
+ggplot(mtcars, aes(x = cyl, y = wt)) +
+  geom_jitter()
+
+# Define the position object using position_jitter(): posn.j
+posn.j <- position_jitter(0.1)
+
+# Use posn.j in geom_point()
+ggplot(mtcars, aes(x = cyl, y = wt)) +
+  geom_point(position = posn.j)
+  
+# Examine the structure of Vocab
+str(Vocab)
+
+# Basic scatter plot of vocabulary (y) against education (x). Use geom_point()
+ggplot(Vocab, aes(education, vocabulary))+
+geom_point()
+
+# Use geom_jitter() instead of geom_point()
+ggplot(Vocab, aes(education, vocabulary))+
+geom_jitter()
+  
+# Using the above plotting command, set alpha to a very low 0.2
+ggplot(Vocab, aes(education, vocabulary))+
+geom_jitter(alpha= 0.2)
+  
+# Using the above plotting command, set the shape to 1
+ggplot(Vocab, aes(education, vocabulary))+
+geom_jitter(alpha= 0.2, shape=1)
