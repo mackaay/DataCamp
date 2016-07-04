@@ -36,7 +36,7 @@ geom_jitter(alpha= 0.2)
 ggplot(Vocab, aes(education, vocabulary))+
 geom_jitter(alpha= 0.2, shape=1)
 
-
+###histogram###
 # Make a univariate histogram
 ggplot(mtcars, aes(mpg))+
 geom_histogram()
@@ -159,7 +159,7 @@ ggplot(mtcars, aes(mpg, fill = am)) +
 ggplot(mtcars, aes(mpg, fill = cyl)) + 
   geom_histogram(binwidth = 1, position= "identity", alpha =0.4)
   
-  
+###line###  
 # Print out head of economics
 head(economics)
 
