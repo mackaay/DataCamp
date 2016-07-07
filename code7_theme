@@ -1,0 +1,113 @@
+# Plot 1: change the plot background color to myPink:
+z + theme(plot.background = element_rect(fill = myPink))
+
+# Plot 2: adjust the border to be a black line of size 3
+z + theme(plot.background = element_rect(fill = myPink, color= "black", size = 3))
+
+# Plot 3: set panel.background, legend.key, legend.background and strip.background to element_blank()
+uniform_panels <-  theme(panel.background = element_blank(), 
+                        legend.key = element_blank(), 
+                        legend.background=element_blank(), 
+                        strip.background = element_blank())
+z + uniform_panels + theme(plot.background = element_rect(fill = myPink, color= "black", size = 3))
+
+# Extend z with theme() function and three arguments
+#remove the grid lines. Do this by correctly specifying the panel.grid argument.
+#add black axis lines. Use element_line() with the color argument to specify the axis.line argument.
+#change the tick marks to be black. Specify the axis.ticks argument, similar to how you specified axis.line.
+z + theme(panel.grid = element_blank(),
+axis.line = element_line(color = "black"),
+axis.ticks = element_line(color = "black")
+)
+
+#change the appearance of the strip text, that is the text in the facet strips. Specify strip.text with element_text(). The size of the text should be 16, the color should be myRed, a color that is predefined for you.
+#change the axis titles. Specify both axis.title.y and axis.title.x inside the element_text() functions to define them. Set color to myRed, hjust to 0 (to put the text in the bottom left corner) and face to "italic".
+#make the axis text black. Specify the axis.text argument to do so.
+# Extend z with theme() function and four arguments
+z + theme(strip.text = element_text(size = 16, color = myRed),
+axis.title.y = element_text(color = myRed, hjust = 0, face = "italic"),
+axis.title.x = element_text(color = myRed, hjust = 0, face = "italic"),
+axis.text = element_text(color ="black")
+)
+
+# Move legend by position
+z + theme(legend.position = c(0.85, 0.85))
+
+# Change direction
+z + theme(legend.direction = "horizontal")
+
+# Change location by name
+z + theme(legend.position ="bottom")
+
+# Remove legend entirely
+z + theme(legend.position ="none")
+
+# Increase spacing between facets
+library(grid)
+z + theme(panel.margin.x = unit(2, "cm"))
+
+# Add code to remove any excess plot margin space
+z + theme(panel.margin.x = unit(2, "cm"),
+plot.margin = unit(c(0,0,0,0), "cm"))
+
+# Theme layer saved as an object, theme_pink
+theme_pink <- theme(panel.background = element_blank(),
+                    legend.key = element_blank(),
+                    legend.background = element_blank(),
+                    strip.background = element_blank(),
+                    plot.background = element_rect(fill = myPink, color = "black", size = 3),
+                    panel.grid = element_blank(),
+                    axis.line = element_line(color = "black"),
+                    axis.ticks = element_line(color = "black"),
+                    strip.text = element_text(size = 16, color = myRed),
+                    axis.title.y = element_text(color = myRed, hjust = 0, face = "italic"),
+                    axis.title.x = element_text(color = myRed, hjust = 0, face = "italic"),
+                    axis.text = element_text(color = "black"),
+                    legend.position = "none")
+  
+# Apply theme_pink to z2
+z2 + theme_pink
+
+# Change code so that old theme is saved as old
+old <- theme_update(panel.background = element_blank(),
+             legend.key = element_blank(),
+             legend.background = element_blank(),
+             strip.background = element_blank(),
+             plot.background = element_rect(fill = myPink, color = "black", size = 3),
+             panel.grid = element_blank(),
+             axis.line = element_line(color = "black"),
+             axis.ticks = element_line(color = "black"),
+             strip.text = element_text(size = 16, color = myRed),
+             axis.title.y = element_text(color = myRed, hjust = 0, face = "italic"),
+             axis.title.x = element_text(color = myRed, hjust = 0, face = "italic"),
+             axis.text = element_text(color = "black"),
+             legend.position = "none")
+
+# Display the plot z2
+z2 + old
+
+# Restore the old plot
+theme_set(old)
+
+# Load ggthemes package
+library(ggthemes)
+
+# Apply theme_tufte
+# Set the theme with theme_set
+theme_set(theme_tufte())
+z2 + 
+  # Or apply it in the ggplot command
+  theme_tufte()
+
+# Apply theme_tufte, modified
+# Set the theme with theme_set
+theme_set(theme_tufte() + 
+          theme(legend.position = c(0.9, 0.9),
+                legend.title = element_text(face = "italic", size = 12),
+                axis.title = element_text(face = "bold", size = 14)))
+z2 + 
+  # Or apply it in the ggplot command
+  theme_tufte() +
+  theme(legend.position = c(0.9, 0.9),
+        legend.title = element_text(face = "italic", size = 12),
+        axis.title = element_text(face = "bold", size = 14))
